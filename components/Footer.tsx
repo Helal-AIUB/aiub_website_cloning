@@ -13,10 +13,10 @@ export default function Footer() {
   return (
     <footer className="bg-black text-gray-400 relative border-t-gray-800 border-t">
       <div className="flex h-[4px] w-full absolute top-0 left-0">
-        <div className="flex-1 bg-[#0047AB]"></div> {/* Blue */}
-        <div className="flex-1 bg-[#00A859]"></div> {/* Green */}
-        <div className="flex-1 bg-[#F1C40F]"></div> {/* Yellow */}
-        <div className="flex-1 bg-[#E74C3C]"></div> {/* Red */}
+        <div className="flex-1 bg-[#0047AB]"></div> 
+        <div className="flex-1 bg-[#00A859]"></div> 
+        <div className="flex-1 bg-[#F1C40F]"></div> 
+        <div className="flex-1 bg-[#E74C3C]"></div>
       </div>
 
       <div
