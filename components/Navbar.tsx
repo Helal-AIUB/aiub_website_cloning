@@ -470,7 +470,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* SUB LINKS / BOTTOM BAR (Eta Scroll korle Hide hoye jabe)*/}
+      {/* SUB LINKS / BOTTOM BAR - Eta Scroll korle Hide hoye jabe*/}
       {!isScrolled && (
         <div className="w-full transition-all duration-300 text-white border-t border-white/20">
           <div className="max-w-[1500px] mx-auto px-4 sm:px-6">
