@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import NewsEvents from "../components/NewsEvents";
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -143,12 +144,12 @@ export default function Home() {
       <section className="max-w-[1200px] mx-auto w-full px-6 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           <div className="relative mt-25 md:mt-24">
-            <div className="absolute -top-16 md:-top-20 left-0 md:left-2 z-20 flex flex-col items-start">
+            <div className="absolute -top-16 md:-top-20 left-0 md:left-[15%] z-20 flex flex-col items-start">
               <h2 className="text-[#0047AB] text-[60px] md:text-[75px] font-extrabold tracking-tight leading-none">
                 Find
               </h2>
 
-              <h3 className="text-[22px] md:text-[28px] font-extrabold text-gray-400 tracking-widest uppercase ml-20 md:ml-32 mt-1">
+              <h3 className="text-[22px] md:text-[25px] font-extrabold text-gray-400 tracking-widest uppercase ml-20 md:ml-28 mt-1">
                 YOUR PROGRAM
               </h3>
             </div>
@@ -290,6 +291,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <NewsEvents />
     </div>
   );
 }
