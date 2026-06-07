@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import NewsEvents from "../components/NewsEvents";
 import Faculties from "../components/Faculties";
+import DiscoverCampus from "../components/DiscoverCampus";
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -294,6 +295,7 @@ export default function Home() {
       </section>
       <NewsEvents />
       <Faculties />
+      <DiscoverCampus />
     </div>
   );
 }
