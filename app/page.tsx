@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import NewsEvents from "../components/NewsEvents";
 import Faculties from "../components/Faculties";
 import DiscoverCampus from "../components/DiscoverCampus";
+import TalentsSparked from "../components/TalentsSparked";
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -296,6 +297,7 @@ export default function Home() {
       <NewsEvents />
       <Faculties />
       <DiscoverCampus />
+      <TalentsSparked />
     </div>
   );
 }
