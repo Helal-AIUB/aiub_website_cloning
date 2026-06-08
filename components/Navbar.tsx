@@ -6,6 +6,7 @@ import Image from "next/image";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile menu state
 
   // Scroll detect korar function
   useEffect(() => {
@@ -90,7 +91,7 @@ const Navbar = () => {
 
       {/* MAIN NAVBAR & LOGO (Scroll korle Blue BG hobe) */}
       <div
-        className={`w-full transition-colors duration-300 ${isScrolled ? "bg-[#0052a5] text-white" : "text-white"}`}
+        className={`w-full transition-colors duration-300 relative ${isScrolled ? "bg-[#0052a5] text-white" : "text-white"}`}
       >
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] items-center">
@@ -348,13 +349,13 @@ const Navbar = () => {
             </div>
 
             {/* CENTER LOGO */}
-            <div className="flex justify-center z-50">
+            <div className="flex justify-start md:justify-center z-50 py-2 md:py-0">
               <Link href="/" className="relative block">
                 <div
                   className={`relative flex items-center justify-center transition-all duration-300 ${
                     isScrolled
-                      ? "w-[60px] h-[60px]"
-                      : "w-[90px] h-[90px] lg:w-[110px] lg:h-[110px]"
+                      ? "w-[50px] h-[50px] md:w-[60px] md:h-[60px]"
+                      : "w-[70px] h-[70px] md:w-[90px] md:h-[90px] lg:w-[110px] lg:h-[110px]"
                   }`}
                 >
                   <Image
@@ -448,31 +449,136 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Mobile Menu Icon */}
+            {/* Mobile Hamburger Icon */}
             <div className="md:hidden flex justify-end py-2">
-              <button className="text-white focus:outline-none drop-shadow-md">
-                <svg
-                  className="h-8 w-8"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-white focus:outline-none drop-shadow-md cursor-pointer p-2"
+              >
+                {isMobileMenuOpen ? (
+                  /* Close (X) Icon */
+                  <svg
+                    className="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                ) : (
+                  /* Hamburger Icon */
+                  <svg
+                    className="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                )}
               </button>
             </div>
           </div>
         </div>
+
+        {/* --- Mobile Dropdown Menu --- */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden w-full bg-[#0047AB] border-t border-blue-400 shadow-xl absolute top-full left-0 z-50">
+            <div className="flex flex-col px-6 py-4 space-y-4 text-[14px] font-bold tracking-wider">
+              <Link
+                href="/about"
+                className="hover:text-blue-200 uppercase"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                ABOUT
+              </Link>
+              <Link
+                href="/academics"
+                className="hover:text-blue-200 uppercase"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                ACADEMICS
+              </Link>
+              <Link
+                href="/admission"
+                className="hover:text-blue-200 uppercase"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                ADMISSION
+              </Link>
+              <Link
+                href="/on-campus"
+                className="hover:text-blue-200 uppercase"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                ON CAMPUS
+              </Link>
+              <Link
+                href="/administration"
+                className="hover:text-blue-200 uppercase"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                ADMINISTRATION
+              </Link>
+              <Link
+                href="/research"
+                className="hover:text-blue-200 uppercase"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                RESEARCH
+              </Link>
+
+              <hr className="border-blue-400/50" />
+
+              {/* Extra Top-bar links for mobile */}
+              <div className="flex flex-col space-y-3 font-medium text-[13px] opacity-90">
+                <Link
+                  href="#"
+                  className="hover:text-blue-200"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Login
+                </Link>
+                <Link
+                  href="#"
+                  className="hover:text-blue-200"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Web Mail
+                </Link>
+                <Link
+                  href="#"
+                  className="hover:text-blue-200"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  MS Teams
+                </Link>
+                <Link
+                  href="#"
+                  className="hover:text-blue-200"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Contact Us
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* SUB LINKS / BOTTOM BAR - Eta Scroll korle Hide hoye jabe*/}
+      {/* SUB LINKS / BOTTOM BAR - Eta Scroll korle Hide hoye jabe. Added hidden md:block jate mobile e grid venge na jay */}
       {!isScrolled && (
-        <div className="w-full transition-all duration-300 text-white border-t border-white/20">
+        <div className="hidden md:block w-full transition-all duration-300 text-white border-t border-white/20">
           <div className="max-w-[1500px] mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-[1fr_auto_1fr] py-2 text-[12px] text-gray-200">
               <div className="flex justify-end items-center space-x-2 pr-6 lg:pr-10 drop-shadow-md">
