@@ -9,6 +9,8 @@ import ApplyNow from "../components/ApplyNow";
 import FactsFigures from "../components/FactsFigures";
 import CampusLife from "../components/CampusLife";
 import ResearchActivities from "../components/ResearchActivities";
+import NotableAlumni from "../components/NotableAlumni";
+import Partners from "../components/Partners";
 export default function Home() {
   return (
     <div className="flex flex-col w-full bg-white">
@@ -26,6 +28,8 @@ export default function Home() {
       <FactsFigures />
       <CampusLife />
       <ResearchActivities />
+      <NotableAlumni />
+      <Partners />
     </div>
   );
 }
