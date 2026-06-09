@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 export default function HeroSlider() {
-  const images = ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg"];
+  const images = ["/images/hero/1.jpg", "/images/hero/2.jpg", "/images/hero/3.jpg", "/images/hero/4.jpg", "/images/hero/5.jpg"];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
