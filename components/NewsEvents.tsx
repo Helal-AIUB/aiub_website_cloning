@@ -7,61 +7,61 @@ const newsData = [
   {
     id: 1,
     title: "FST: Post Conference Seminar 2026",
-    img: "/item1.png",
+    img: "/images/news_events/item1.png",
   },
   {
     id: 2,
     title: "Industrial Visit to the DESCO 132/33 KV Grid Substation",
-    img: "/item2.png",
+    img: "/images/news_events/item2.png",
   },
   {
     id: 3,
     title:
       "Champions Crowned at the AIUB Inter College Football Championship 2026",
-    img: "/item3.png",
+    img: "/images/news_events/item3.png",
   },
   {
     id: 4,
     title:
       "AIUB signed MoU with Chitkara University Rajpura Chandigarh, Panjab",
-    img: "/item4.png",
+    img: "/images/news_events/item4.png",
   },
   {
     id: 5,
     title:
       "Seminar on the Pathway to Game Development and the Future of Industry",
-    img: "/item5.png",
+    img: "/images/news_events/item5.png",
   },
   {
     id: 6,
     title: "The AIUB Family Congratulates the Following Individuals",
-    img: "/item6.png",
+    img: "/images/news_events/item6.png",
   },
   {
     id: 7,
     title: "Workshop Organized by AIUB Computer Club Spring25-26 Semester",
-    img: "/item7.png",
+    img: "/images/news_events/item7.png",
   },
   {
     id: 8,
     title:
       "AIUB Expands Global Learning Opportunities Through Collaboration with Saylor",
-    img: "/item8.png",
+    img: "/images/news_events/item8.png",
   },
   {
     id: 9,
     title: "AIUB Mars and Rovers Team in Europe",
-    img: "/item9.png",
+    img: "/images/news_events/item9.png",
   },
   {
     id: 10,
     title: "Beyond the Balance Sheet: Financial Accounting Contest Spring 2026",
-    img: "/item10.png",
+    img: "/images/news_events/item10.png",
   },
   {
     id: 11,
     title: "AIUB EEE Students win best project Award at ICCEB",
-    img: "/item11.png",
+    img: "/images/news_events/item11.png",
   },
   {
     id: 12,
@@ -79,7 +79,7 @@ const columns = [
   [newsData[10], newsData[11]],
 ];
 
-// Marquee infinite 
+// Marquee infinite
 const duplicatedColumns = [...columns, ...columns];
 
 export default function NewsEvents() {
