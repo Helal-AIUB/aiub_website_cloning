@@ -51,6 +51,7 @@ const alumniNodes = [
     y: 50,
     z: 20,
     info: Info1,
+    facultyId: "fba",
   },
 
   // --- Top Area ---
@@ -58,7 +59,7 @@ const alumniNodes = [
     id: "fba",
     type: "text",
     text: "FBA",
-    colorCode: "#008a45", // Green (Direct Hex)
+    colorCode: "#008a45",
     size: "w-20 h-20 md:w-28 md:h-28",
     x: 35,
     y: 28,
@@ -73,12 +74,13 @@ const alumniNodes = [
     y: 28,
     z: 10,
     info: Info2,
+    facultyId: "fst",
   },
   {
     id: "fst",
     type: "text",
     text: "FST",
-    colorCode: "#0072bc", // Blue (Direct Hex)
+    colorCode: "#0072bc",
     size: "w-24 h-24 md:w-32 md:h-32",
     x: 58,
     y: 26,
@@ -90,7 +92,7 @@ const alumniNodes = [
     id: "fass",
     type: "text",
     text: "FASS",
-    colorCode: "#c8102e", // Red (Direct Hex)
+    colorCode: "#c8102e",
     size: "w-24 h-24 md:w-32 md:h-32",
     x: 24,
     y: 40,
@@ -105,6 +107,7 @@ const alumniNodes = [
     y: 65,
     z: 10,
     info: Info3,
+    facultyId: "fe", 
   },
   {
     id: "img4",
@@ -115,6 +118,7 @@ const alumniNodes = [
     y: 62,
     z: 10,
     info: Info4,
+    facultyId: "fass", 
   },
 
   // --- Right Area ---
@@ -127,12 +131,13 @@ const alumniNodes = [
     y: 42,
     z: 10,
     info: Info5,
+    facultyId: "fba", 
   },
   {
     id: "fe",
     type: "text",
     text: "FE",
-    colorCode: "#f1a42b", // Orange (Direct Hex)
+    colorCode: "#f1a42b",
     size: "w-20 h-20 md:w-28 md:h-28",
     x: 74,
     y: 55,
@@ -147,6 +152,7 @@ const alumniNodes = [
     y: 68,
     z: 10,
     info: Info6,
+    facultyId: "fe", 
   },
 
   // --- Bottom Area ---
@@ -159,6 +165,7 @@ const alumniNodes = [
     y: 80,
     z: 10,
     info: Info7,
+    facultyId: "fass", 
   },
 ];
 
@@ -167,7 +174,7 @@ export default function NotableAlumni() {
 
   return (
     <section className="w-full bg-white py-16 md:py-24 overflow-hidden relative">
-      {/* --- Heading Section --- */}
+      {/* --- Heading Section (Remains Same) --- */}
       <div className="flex items-center justify-center mb-10 md:mb-16">
         <h2 className="text-[#0047AB] text-[50px] md:text-[70px] font-extrabold mr-3 tracking-tight leading-none">
           Notable
@@ -205,8 +212,15 @@ export default function NotableAlumni() {
       {/* --- Floating Constellation Container --- */}
       <div className="relative w-full max-w-[1200px] mx-auto h-[600px] md:h-[800px]">
         {alumniNodes.map((node) => {
-          const isActive = activeId === node.id;
+          const isDirectlyActive = activeId === node.id;
           const isSomethingActive = activeId !== null;
+
+          // NEW LOGIC: Check if this node is an alumni and its faculty is currently clicked
+          const isRelatedToActiveFaculty =
+            node.type === "image" && node.facultyId === activeId;
+
+          // Node is highlighted if it's clicked OR its faculty is clicked
+          const isHighlighted = isDirectlyActive || isRelatedToActiveFaculty;
 
           return (
             <div
@@ -215,30 +229,31 @@ export default function NotableAlumni() {
               style={{
                 top: `${node.y}%`,
                 left: `${node.x}%`,
-                zIndex: isActive ? 50 : node.z, // Click korle ekdom samne chole ashbe
+                zIndex: isHighlighted ? 50 : node.z, // Highlighted nodes come to front
               }}
             >
               {/* Scale/Zoom Wrapper */}
               <div
                 className={`relative flex flex-col items-center transition-all duration-700
-                  ${isActive ? "scale-[1.25] md:scale-[1.35]" : "scale-100 hover:scale-105"}
-                  ${isSomethingActive && !isActive ? "opacity-30 blur-[2px]" : "opacity-100 blur-0"}
+                  ${isDirectlyActive ? "scale-[1.25] md:scale-[1.35]" : "scale-100 hover:scale-105"}
+                  ${isSomethingActive && !isHighlighted ? "opacity-30 blur-[2px]" : "opacity-100 blur-0"}
                 `}
               >
                 {/* Image/Text Bubble Wrapper */}
                 <div className="relative">
                   <div
-                    onClick={() => setActiveId(isActive ? null : node.id)}
+                    onClick={() =>
+                      setActiveId(isDirectlyActive ? null : node.id)
+                    }
                     className={`
                       relative rounded-full overflow-hidden cursor-pointer
                       flex items-center justify-center transition-all duration-700
                       ${node.size}
-                      /* Active Image Outline: Border & Blue Ring */
-                      ${isActive && node.type === "image" ? "border-4 border-white ring-[2px] ring-[#59a3eb] shadow-2xl" : "shadow-lg"}
+                      /* Active Image Outline */
+                      ${isHighlighted && node.type === "image" ? "border-4 border-white ring-[2px] ring-[#59a3eb] shadow-2xl" : "shadow-lg"}
                       /* Active Text Outline */
-                      ${isActive && node.type === "text" ? "shadow-2xl ring-4 ring-white" : ""}
+                      ${isDirectlyActive && node.type === "text" ? "shadow-2xl ring-4 ring-white" : ""}
                     `}
-                    // Direct Inline Style for bulletproof colors
                     style={{
                       backgroundColor:
                         node.type === "text" ? node.colorCode : "#e5e7eb",
@@ -247,7 +262,7 @@ export default function NotableAlumni() {
                     {node.type === "text" ? (
                       // Faculty Text
                       <span
-                        className={`text-white font-bold tracking-wider ${isActive ? "text-lg md:text-xl" : "text-sm md:text-base"}`}
+                        className={`text-white font-bold tracking-wider ${isDirectlyActive ? "text-lg md:text-xl" : "text-sm md:text-base"}`}
                       >
                         {node.text}
                       </span>
@@ -257,14 +272,13 @@ export default function NotableAlumni() {
                         src={node.src || "/banner-logo.png"}
                         alt="Alumni"
                         fill
-                        // Grayscale shudhu Image tag er vitor apply kora holo
-                        className={`object-cover pointer-events-none transition-all duration-700 ${isActive ? "grayscale-0" : "grayscale"}`}
+                        className={`object-cover pointer-events-none transition-all duration-700 ${isHighlighted ? "grayscale-0" : "grayscale"}`}
                       />
                     )}
                   </div>
 
-                  {/* Close (X) Button */}
-                  {isActive && node.type === "image" && (
+                  {/* Close (X) Button - Ekhon Text and Image ubhoy khetrei kaj korbe jodi active thake */}
+                  {isDirectlyActive && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -279,8 +293,8 @@ export default function NotableAlumni() {
                   )}
                 </div>
 
-                {/* --- Information Section (Absolute to prevent cutting) --- */}
-                {isActive && node.type === "image" && node.info && (
+                {/* --- Information Section (Only shows if explicitly clicked on the Image itself) --- */}
+                {isDirectlyActive && node.type === "image" && node.info && (
                   <div className="absolute top-full mt-4 md:mt-5 flex flex-col items-center text-center w-[200px] md:w-[250px] z-50">
                     <h4 className="text-black font-bold text-sm md:text-base tracking-wide drop-shadow-sm">
                       {node.info.name}
