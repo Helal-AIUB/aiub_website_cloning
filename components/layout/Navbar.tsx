@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-// Optimized Data Arrays (Kono kichu change korle shudhu ekhane korlei hobe)
-const topLinks = ["Login", "Web Mail", "MS Teams", "Contact Us"];
+// Login বাদ দিয়ে বাকিগুলো এখানে রাখলাম
+const topLinks = ["Web Mail", "MS Teams", "Contact Us"];
 const aboutLinks = ["Information or Overview", "General Information", "Rules of Campus Entry", "Why Study Here"];
 const adminLinks = ["The Vice Chancellor", "The Pro Vice Chancellor"];
 const researchLinks = ["Research Overview", "Publications"];
@@ -21,7 +21,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // UI break na korar jonno default preventer
   const handleDeadLink = (e: React.MouseEvent) => e.preventDefault();
 
   return (
@@ -37,6 +36,12 @@ export default function Navbar() {
             <Link href="#" onClick={handleDeadLink} className={`transition ${isScrolled ? "hover:text-blue-700" : "hover:text-blue-200"}`}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             </Link>
+            
+            {/* ডাইরেক্ট লগইন লিংক - কোন ঝামেলা ছাড়াই কাজ করবে */}
+            <Link href="/login" className={`transition ${isScrolled ? "hover:text-blue-700" : "hover:text-blue-200"}`}>
+              Login
+            </Link>
+
             {topLinks.map((item, i) => (
               <Link key={i} href="#" onClick={handleDeadLink} className={`transition ${isScrolled ? "hover:text-blue-700" : "hover:text-blue-200"}`}>{item}</Link>
             ))}
@@ -49,10 +54,7 @@ export default function Navbar() {
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] items-center">
             
-            {/* LEFT MENU */}
             <div className="hidden md:flex justify-end items-center space-x-6 lg:space-x-10 pr-6 lg:pr-10">
-              
-              {/* ABOUT */}
               <div className={`relative group transition-all duration-300 ${isScrolled ? "py-3" : "py-6"}`}>
                 <Link href="#" onClick={handleDeadLink} className="font-bold text-[14px] lg:text-[15px] tracking-wider hover:text-blue-200 uppercase drop-shadow-md transition">ABOUT</Link>
                 <div className="absolute left-0 top-full mt-0 w-[260px] bg-[#0047AB] text-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl z-50 border-t-2 border-blue-400">
@@ -66,12 +68,10 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {/* ACADEMICS (Mega Menu) */}
               <div className={`relative group transition-all duration-300 ${isScrolled ? "py-3" : "py-6"}`}>
                 <Link href="#" onClick={handleDeadLink} className="font-bold text-[14px] lg:text-[15px] tracking-wider hover:text-blue-200 uppercase drop-shadow-md transition">ACADEMICS</Link>
                 <div className="absolute left-[-20px] md:left-[-100px] lg:left-[-150px] top-full mt-0 w-[850px] lg:w-[950px] bg-[#0052a5] text-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl z-50 border-t-2 border-blue-400">
                   <div className="grid grid-cols-4 gap-6 p-8">
-                    {/* Repeated columns mapped for optimization */}
                     {[
                       { title: "Faculties", links: ["Faculty of Arts and Social Sciences", "Faculty of Business Administration", "Faculty of Engineering", "Faculty of Health and Life Sciences", "Faculty of Science and Technology"] },
                       { title: "Information", links: ["Academic Calendar", "Academic Regulations", "Course Catalog", "Tuition Fee", "Faculty List"] },
@@ -108,13 +108,11 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {/* ADMISSION */}
               <div className={`relative transition-all duration-300 ${isScrolled ? "py-3" : "py-6"}`}>
                 <Link href="#" onClick={handleDeadLink} className="font-bold text-[14px] lg:text-[15px] tracking-wider hover:text-blue-200 uppercase drop-shadow-md transition">ADMISSION</Link>
               </div>
             </div>
 
-            {/* CENTER LOGO */}
             <div className="flex justify-start md:justify-center z-50 py-2 md:py-0">
               <Link href="#" onClick={handleDeadLink} className="relative block">
                 <div className={`relative flex items-center justify-center transition-all duration-300 ${isScrolled ? "w-[50px] h-[50px] md:w-[60px] md:h-[60px]" : "w-[70px] h-[70px] md:w-[90px] md:h-[90px] lg:w-[110px] lg:h-[110px]"}`}>
@@ -123,13 +121,11 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* RIGHT MENU */}
             <div className="hidden md:flex justify-start items-center space-x-6 lg:space-x-10 pl-6 lg:pl-10">
               <div className={`relative transition-all duration-300 ${isScrolled ? "py-3" : "py-6"}`}>
                 <Link href="#" onClick={handleDeadLink} className="font-bold text-[14px] lg:text-[15px] tracking-wider hover:text-blue-200 uppercase drop-shadow-md transition">ON CAMPUS</Link>
               </div>
 
-              {/* ADMINISTRATION */}
               <div className={`relative group transition-all duration-300 ${isScrolled ? "py-3" : "py-6"}`}>
                 <Link href="#" onClick={handleDeadLink} className="font-bold text-[14px] lg:text-[15px] tracking-wider hover:text-blue-200 uppercase drop-shadow-md transition">ADMINISTRATION</Link>
                 <div className="absolute left-0 top-full mt-0 w-[260px] bg-[#0047AB] text-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl z-50 border-t-2 border-blue-400">
@@ -143,7 +139,6 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {/* RESEARCH */}
               <div className={`relative group transition-all duration-300 ${isScrolled ? "py-3" : "py-6"}`}>
                 <Link href="#" onClick={handleDeadLink} className="font-bold text-[14px] lg:text-[15px] tracking-wider hover:text-blue-200 uppercase drop-shadow-md transition">RESEARCH</Link>
                 <div className="absolute right-0 top-full mt-0 w-[260px] bg-[#0047AB] text-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl z-50 border-t-2 border-blue-400">
@@ -158,7 +153,6 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Mobile Hamburger Icon */}
             <div className="md:hidden flex justify-end py-2">
               <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-white focus:outline-none drop-shadow-md p-2">
                 {isMobileMenuOpen ? (
@@ -180,6 +174,12 @@ export default function Navbar() {
               ))}
               <hr className="border-blue-400/50" />
               <div className="flex flex-col space-y-3 font-medium text-[13px] opacity-90">
+                
+                {/* মোবাইল লগইন বাটন */}
+                <Link href="/login" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-blue-200">
+                  Login
+                </Link>
+
                 {topLinks.map((item, i) => (
                   <Link key={i} href="#" onClick={(e) => { handleDeadLink(e); setIsMobileMenuOpen(false); }} className="hover:text-blue-200">{item}</Link>
                 ))}
@@ -189,12 +189,11 @@ export default function Navbar() {
         )}
       </div>
 
-      {/* --- SUB LINKS / BOTTOM BAR --- */}
+      {/* --- SUB LINKS --- */}
       {!isScrolled && (
         <div className="hidden md:block w-full transition-all duration-300 text-white border-t border-white/20">
           <div className="max-w-[1500px] mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-[1fr_auto_1fr] py-2 text-[12px] text-gray-200">
-              
               <div className="flex justify-end items-center space-x-2 pr-6 lg:pr-10 drop-shadow-md">
                 {["Notices", "News And Events", "Newsletter", "Convocation"].map((item, i, arr) => (
                   <div key={i} className="flex space-x-2">
@@ -203,9 +202,7 @@ export default function Navbar() {
                   </div>
                 ))}
               </div>
-
               <div className="w-24 lg:w-[110px]"></div>
-
               <div className="flex justify-start items-center space-x-2 pl-6 lg:pl-10 drop-shadow-md">
                 {["Alumni", "Visitors", "Future Students", "Campus Map"].map((item, i, arr) => (
                   <div key={i} className="flex space-x-2">
@@ -214,7 +211,6 @@ export default function Navbar() {
                   </div>
                 ))}
               </div>
-
             </div>
           </div>
         </div>
