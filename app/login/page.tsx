@@ -3,30 +3,34 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { authClient } from "../lib/auth-client";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
+  e.preventDefault();
+  setLoading(true);
 
-    const { data, error: authError } = await authClient.signIn.email({
-      email,
-      password,
-      callbackURL: "/dashboard", 
-    });
+  const res = await fetch("/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
 
-    if (authError) {
-      setError(authError.message || "Invalid Email or Password.");
-    }
-    setLoading(false);
-  };
+  const data = await res.json();
+  if (data.success) {
+    router.push("/dashboard"); 
+  } else {
+    setError(data.message);
+  }
+  setLoading(false);
+};
 
   return (
     <div className="min-h-screen w-full bg-[#f4f4f4] flex items-center justify-center p-4 font-sans">

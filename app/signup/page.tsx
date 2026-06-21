@@ -16,31 +16,30 @@ export default function SignUpPage() {
 
   // ১. Credential SignUp (Name, Email, Password)
   const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
+  e.preventDefault();
+  setLoading(true);
+  setError("");
 
-    const { data, error: authError } = await authClient.signUp.email({
-      email,
-      password,
-      name,
+  try {
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
     });
 
-    if (authError) {
-      setError(authError.message || "Something went wrong. Try again.");
-      setLoading(false);
-      return; // এরর আসলে কোড এখানেই থেমে যাবে, নিচের সাকসেস কোডে যাবে না
+    const data = await res.json();
+
+    if (data.success) {
+      router.push("/login");
+    } else {
+      setError(data.message || "Failed to create user");
     }
-
-    // অ্যাকাউন্ট সফলভাবে তৈরি হলে কোড এখানে আসবে:
+  } catch (err) {
+    setError("Something went wrong. Please try again.");
+  } finally {
     setLoading(false);
-    setName("");
-    setEmail("");
-    setPassword("");
-
-    // ম্যানুয়ালি ড্যাশবোর্ডে পুশ করে দেওয়া হলো
-    router.push("/dashboard");
-  };
+  }
+};
 
   // ২. Social SignUp (Google & GitHub)
   const handleSocialSignUp = async (provider: "google" | "github") => {
@@ -124,7 +123,7 @@ export default function SignUpPage() {
         <div className="w-full my-5 flex items-center justify-between text-gray-400 text-xs">
           <span className="w-full h-[1px] bg-gray-200"></span>
           <span className="px-3 font-medium text-gray-400 whitespace-nowrap">
-            Or Sign Up With
+            Or Continue With
           </span>
           <span className="w-full h-[1px] bg-gray-200"></span>
         </div>
