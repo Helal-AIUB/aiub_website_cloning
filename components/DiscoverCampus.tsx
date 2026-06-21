@@ -17,21 +17,21 @@ const campusData = [
     title: "Pick your ground.",
     subtitle:
       "Cricket, football, basketball, tennis, badminton, volleyball courts - whatever your game is we have the ground.",
-    img: "/4.jpg",
+    img: "/images/hero/4.jpg",
   },
   {
     id: "study",
     tabName: "Study Area",
     title: "Study Area",
     subtitle: "Take a break to be prepared for next session.",
-    img: "/1.jpg",
+    img: "/images/hero/1.jpg",
   },
   {
     id: "gym",
     tabName: "Gymnasium",
     title: "Gymnasium",
     subtitle: "Boost your strength a bit up with sweaty experience.",
-    img: "/5.jpg",
+    img: "/images/hero/5.jpg",
   },
   {
     id: "amphi",
