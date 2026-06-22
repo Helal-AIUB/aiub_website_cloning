@@ -79,7 +79,8 @@ function NewsCard({ item, index }: { item: any; index: number }) {
 
   return (
     <Link
-      href={`/news/${item.id}`}
+      href={`/#news-${item.id}`}
+      id={`news-${item.id}`}
       className={`relative flex-shrink-0 ${size} rounded-lg overflow-hidden group`}
     >
       <Image

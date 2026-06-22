@@ -49,7 +49,7 @@ export default function TalentsSparked() {
 
           <div className="w-full md:w-1/2 md:pl-20 pb-[30vh]">
             {talents.map((item, index) => (
-              <div key={item.id} data-index={index} ref={(el) => { itemRefs.current[index] = el; }} className="min-h-[70vh] flex flex-col justify-center py-10">
+              <div key={item.id} id={`talent-${item.id}`} data-index={index} ref={(el) => { itemRefs.current[index] = el; }} className="min-h-[70vh] flex flex-col justify-center py-10">
                 <h3 className={`text-4xl font-bold transition-colors duration-700 ${activeIndex === index ? "text-gray-900" : "text-gray-300"}`}>
                   {item.title}
                 </h3>
