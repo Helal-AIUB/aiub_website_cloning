@@ -71,7 +71,7 @@ export default async function FindProgramNotice() {
                 const month = dateObj.toLocaleString('default', { month: 'short' });
 
                 return (
-                  <div key={notice.id} className="flex border-b border-gray-200 py-3.5 hover:bg-gray-50 transition group">
+                  <div key={notice.id} id={`notice-${notice.id}`} className="flex border-b border-gray-200 py-3.5 hover:bg-gray-50 transition group">
                     <div className="flex flex-col items-center justify-center min-w-[65px] border-r border-gray-200 pr-4">
                       <span className="text-red-500 font-bold text-xl">{day}</span>
                       <span className="text-[#0047AB] font-bold text-[11px] uppercase">{month}</span>

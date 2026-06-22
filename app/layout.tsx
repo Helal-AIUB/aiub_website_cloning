@@ -9,17 +9,36 @@ import LayoutProvider from "../components/layout/LayoutProvider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "AIUB | American International University-Bangladesh",
-  description: "AIUB website using Next.js",
+  metadataBase: new URL("https://aiub-website-cloning.vercel.app"),
+  title: {
+    default: "AIUB | American International University-Bangladesh",
+    template: "%s | AIUB Website",
+  },
+  description: "AIUB website. Get the latest news, notices, faculty information, and academic updates from American International University-Bangladesh.",
+  keywords: ["AIUB", "University Bangladesh", "AIUB News", "AIUB Notice", "Computer Science AIUB"],
+  authors: [{ name: "aiub" }], 
+  openGraph: {
+    type: "website",
+    title: "AIUB | American International University-Bangladesh",
+    description: "Get the latest updates and academic notices from AIUB.",
+    siteName: "AIUB Website Clone",
+  },
 };
+
+// export const metadata: Metadata = {
+//   title: "AIUB | American International University-Bangladesh",
+//   description: "AIUB website using Next.js",
+// };
 
 export default function RootLayout({
   children,
